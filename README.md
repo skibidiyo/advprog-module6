@@ -1,0 +1,3 @@
+# Commit 1 Reflection
+
+The code sets up a TCP listener on 127.0.0.1:7878, forwarding each incoming connection to the handle_connection function. Inside handle_connection, the TcpStream is wrapped in a BufReader, which reads incoming lines until it reaches an empty line indicating the end of the request headers. These header lines are collected into a vector and printed to the console, revealing typical HTTP request details. Because no response is sent back, a browser or other software initiating the connection will continue waiting until the connection times out.
