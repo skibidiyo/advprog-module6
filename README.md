@@ -29,7 +29,8 @@ A thread pool is a group of pre-initialized threads that are ready to handle tas
 
 The code defines a ThreadPool structure that holds a fixed number of worker threads and a sender for dispatching tasks through an mpsc channel. Each worker is represented by a Worker struct that spawns a thread, which continuously waits for and executes jobs from a shared, mutex-protected receiver. A job is defined as a boxed closure that implements FnOnce() + Send + 'static, allowing it to be safely executed in a thread, and the main function dispatches tasks like handling TCP connections using the execute method. This design enables the server to process multiple requests concurrently, ensuring that slow tasks do not block the entire server.
 
-
+# Commit Bonus Reflection
+I added a build() function to the ThreadPool implementation as an alternative to the new() constructor. This change was made to explore different naming conventions and gain insights into API design in Rust. Functionally, build() performs the same operations as new()—it creates a channel, wraps it in a Mutex and Arc, and initializes the worker threads. Using a name like build() can be beneficial when the creation process may eventually require more complex configuration or evolve into a builder pattern, which is common in many Rust libraries and frameworks. Although both methods currently perform the same actions, build() can be more expressive for developers by suggesting a more elaborate setup, whereas new() is typically used for straightforward object creation.
 
 
 
