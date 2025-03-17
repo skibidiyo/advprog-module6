@@ -21,6 +21,8 @@ The handle_connection function can filter incoming requests. If the request targ
 
 Refactoring reduces repetition and makes the code more maintainable. Before the refactoring, the if/else blocks each define and construct similar responses, resulting in duplicated logic for reading a file, calculating its length, and formatting the response. By using the (status_line, filename) tuple, we move the response-building steps outside of the conditional, reducing duplication and simplifying changes.
 
+# Commit 4 reflection
+In the updated code, an additional route (GET /sleep HTTP/1.1) is handled by introducing a 10-second delay before returning the response. This means that when the browser accesses the /sleep route, it takes longer to load because the thread sleeps for 10 seconds. Since the server processes requests synchronously, a slow route can delay handling other requests if many users connect simultaneously. This behavior highlights the importance of considering concurrency or asynchronous processing in a production environment.
 
 
 
